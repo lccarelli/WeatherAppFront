@@ -20,11 +20,6 @@ const cities = [
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = { city: null }
-  }
-
   render() {
     return (
       <div className="App">
@@ -34,10 +29,7 @@ class App extends Component {
             <LocationListContainer cities={cities}/>
           </Grid>
           <Grid item xs={12} sm={6}>
-                {
-                  this.state.city &&
-                    <ForecastExtendedContainer/>
-                }
+            <ForecastExtendedContainer/>
           </Grid>
         </Grid>
       </div>

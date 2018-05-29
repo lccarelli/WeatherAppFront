@@ -25,11 +25,11 @@ class Location extends React.Component {
 
   componentDidMount(){
     // console.log('culo');
-    axios.post('/saveLocation',{city:this.props.city}).then((doc) => {
-      // console.log(doc);
-    }).catch((err) => {
-      // console.log(err);
-    });
+    // axios.post('/saveLocation',{city:this.props.city}).then((doc) => {
+    //   // console.log(doc);
+    // }).catch((err) => {
+    //   // console.log(err);
+    // });
   };
 
   render(){
