@@ -1,5 +1,5 @@
 {
-  "name": "jirafa",
+  "name": "weatherappfrontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,11 +12,16 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.4",
     "react-weathericons": "^1.0.4",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",

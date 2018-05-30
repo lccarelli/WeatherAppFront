@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
+function AppHeader (props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -30,7 +30,7 @@ function ButtonAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            WeatherFun
+            Weather
           </Typography>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
@@ -39,8 +39,8 @@ function ButtonAppBar(props) {
   );
 }
 
-ButtonAppBar.propTypes = {
+AppHeader.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(AppHeader);

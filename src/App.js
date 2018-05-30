@@ -1,40 +1,31 @@
-import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-
-import ButtonAppBar from './components/AppNavBar';
-import LocationListContainer from './containers/LocationListContainer';
-import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
-
+import React from 'react';
+import { Route, Router } from 'react-router'
+import PropTypes from 'prop-types'
 import './App.css';
+import AppHeader from './components/FullContainer/AppHeader';
+import Home from './views/Home';
 
 
-const cities = [
-  'Buenos Aires,AR',
-  'New York,US',
-  'Moscow, US',
-  'Berlin, US',
-  'Madrid,ES',
-  'Bogota,COL',
-  'Toki,JP'
-];
-
-class App extends Component {
+class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <ButtonAppBar/>
-        <Grid container spacing={0}>
-          <Grid item xs={12} sm={6}>
-            <LocationListContainer cities={cities}/>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <ForecastExtendedContainer/>
-          </Grid>
-        </Grid>
+      <div>
+        <AppHeader/>
+        <Router history={ this.props.history }>
+        <div>
+          <Route exact path="/" component={ Home }/>
+          {/* Here you can put more routes on */}
+        </div>
+      </Router>
+
       </div>
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.any
+};
 
 export default App;
