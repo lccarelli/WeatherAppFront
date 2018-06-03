@@ -20,8 +20,8 @@ const styles = {
   },
 };
 
-function AppHeader (props) {
-  const { classes } = props;
+function Header ({classes, title}) {
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -30,7 +30,7 @@ function AppHeader (props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Weather
+            {title}
           </Typography>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
@@ -39,8 +39,9 @@ function AppHeader (props) {
   );
 }
 
-AppHeader.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(AppHeader);
+export default withStyles(styles)(Header);

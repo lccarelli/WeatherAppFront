@@ -1,5 +1,31 @@
+import axios from 'axios';
 import transformForecastExtended from './../services/transformForecastExtended';
 import transformWeather from './../services/transformWeather';
+
+
+//USERS
+export const START_GET_USERS = 'START_GET_USERS';
+export const COMPLETE_GET_USERS = 'COMPLETE_GET_USERS';
+export const ERROR_GET_USERS = 'ERROR_GET_USERS';
+
+const startGetUsers = payload => ({ type: START_GET_USERS, payload });
+const completeGetUsers = payload => ({ type: COMPLETE_GET_USERS, payload });
+const errorGetUsers = payload => ({ type: ERROR_GET_USERS, payload });
+
+export const getUsers = () => {
+  return (dispatch, getstate) => {
+      dispatch(startGetUsers());
+      console.log('se llamo a la accion de get user');
+      axios.get('/getUsers').then((response) => {
+        if(response.data)dispatch(completeGetUsers(response.data.usuarios));
+      }).catch((err) => {
+          dispatch(errorGetUsers(err));
+      })
+  }
+}
+
+
+//CITY
 
 export const SET_CITY = 'SET_CITY';
 export const SET_FORECAST_DATA = 'SET_FORECAST_DATA';
@@ -15,8 +41,6 @@ const setWeatherCity = payload => ({type: SET_WEATHER_CITY, payload});
 const urlForecast = 'http://api.openweathermap.org/data/2.5/forecast';
 const urlWeather = 'http://api.openweathermap.org/data/2.5/weather';
 const apiKey = '520f5e5567a4fd09ce34799b138a759b';
-
-
 
 export const setSelectedCity = payload => {
   return (dispatch, getState) => {

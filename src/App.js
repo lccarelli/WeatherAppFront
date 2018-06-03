@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Router } from 'react-router'
-import PropTypes from 'prop-types'
+import { Route, Router } from 'react-router';
+import PropTypes from 'prop-types';
 import './App.css';
-import AppHeader from './components/FullContainer/AppHeader';
-import Home from './views/Home';
+import UserListItem from '../src/components/Users/UserList';
+import UserBoard from './views/UserBoard';
+import Home from './components/FullContainer/Home'
 
 
 class App extends React.Component {
@@ -11,11 +12,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AppHeader/>
         <Router history={ this.props.history }>
         <div>
-          <Route exact path="/" component={ Home }/>
-          {/* Here you can put more routes on */}
+          <Route exact path="/home" component={Home}/>
+          <Route exact path="/boards" component={ UserListItem }/>
+          <Route exact path="/boards/:nombre" component={ UserBoard }/>
         </div>
       </Router>
 
@@ -25,7 +26,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  history: PropTypes.any
+  history: PropTypes.any,
 };
 
 export default App;

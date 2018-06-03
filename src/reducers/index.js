@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {createSelector} from 'reselect';
+import {getUsers} from './users';
 import { initial } from './initial'
 import {city} from './city';
 import {cities,
@@ -9,6 +10,7 @@ import {cities,
 
 export default combineReducers({
     initial,
+    getUsers,
     city,
     cities
 });

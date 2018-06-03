@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import withTheme from '@material-ui/core/styles/withTheme';
-import axios from 'axios';
+// import axios from 'axios';
 
 const styles = {
   root: {
