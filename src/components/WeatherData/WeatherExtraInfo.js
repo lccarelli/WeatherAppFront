@@ -7,8 +7,8 @@ const WeatherExtraInfo = (props) => {
   const wind = props.wind;
   return (
     <div>
-        <div>{`Humidity: ${humidity} %`}</div>
-        <div>{`Wind: ${wind}`}</div>
+        <div>{`humedad: ${humidity} %`}</div>
+        <div>{`vientos: ${wind}`}</div>
     </div>
   );
 }

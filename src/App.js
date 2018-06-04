@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import './App.css';
 import UserListItem from '../src/components/Users/UserList';
 import UserBoard from './views/UserBoard';
-import Home from './components/FullContainer/Home'
+import Home from './views/Home';
+import Start from './views/Start';
 
 
 class App extends React.Component {
@@ -14,6 +15,7 @@ class App extends React.Component {
       <div>
         <Router history={ this.props.history }>
         <div>
+          <Route exact path="/" component={Start}/>
           <Route exact path="/home" component={Home}/>
           <Route exact path="/boards" component={ UserListItem }/>
           <Route exact path="/boards/:nombre" component={ UserBoard }/>

@@ -11,6 +11,7 @@ const styles = theme => ({
   card: {
     display: 'flex',
     margin: '2rem',
+    backgroundColor: 'transparent !important',
   },
   details: {
     display: 'flex',
@@ -19,6 +20,7 @@ const styles = theme => ({
   },
   content: {
     flex: '1 0 auto',
+    color: '#fff',
   },
   cover: {
     width: 151,
@@ -47,11 +49,14 @@ const ForecastExtended = ({forecastData, city, classes}) => (
       <div>
         <Card className={classes.card}>
           <CardContent className={classes.content}>
-            ForecastExtended {city}
-            {forecastData?
-              listForecastItemDay(forecastData):
-              renderProgressData()
-            }
+            <div className="title-extendido">PRONÓSTICO EXTENDIDO</div>
+             <div className="city-extendido">{city}</div>
+             <div className="pronostico-extendido">
+               {forecastData?
+                 listForecastItemDay(forecastData):
+                 renderProgressData()
+               }
+             </div>
           </CardContent>
         </Card>
       </div>

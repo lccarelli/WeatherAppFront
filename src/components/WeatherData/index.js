@@ -13,14 +13,14 @@ const WeatherData = ({data}) => {
 
   return(
       <div>
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
+        <Grid container spacing={8}>
+          <Grid item xs={6} className="weather-temperature">
             <WeatherTemperature
               temperature={temperature}
               weatherState={weatherState}
             />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} className="weather-extrainfo">
             <WeatherExtraInfo
               humidity={humidity}
               wind={wind}
