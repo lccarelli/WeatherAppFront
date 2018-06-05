@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux"
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router';
 import { withStyles } from '@material-ui/core/styles';
@@ -30,8 +31,8 @@ class Home extends React.Component {
   }
 
   render() {
-    // const {nombre} = this.props;
-    const nombre = 'laura';
+
+    const nombre = this.props.usuario.nombre;
     if(this.state.isRedirected){
       return(<Redirect to={'/boards/'+ nombre }/>);
     }
@@ -48,6 +49,12 @@ class Home extends React.Component {
     );
   }
 }
+function mapStateToProps(state){
+  //El lado de la izquierda es lo que va a aparecer
+  // en tus props. La derecha, es tu objeto global
+  return {
+    usuario:state.user
+  }
+}
 
-
-export default Home;
+export default connect(mapStateToProps,{})(Home);

@@ -11,16 +11,19 @@ class LocationListContainer extends React.Component {
     const {setWeather, setCity, cities, city} = this.props;
       setCity(city);
       setWeather(cities);
-
+      console.log("this.props.citiesWeather");
+      console.log(this.props.citiesWeather);
   }
   //manejador de evento
   handleSelectedLocation = city => {
     this.props.setCity(city);
   }
-
+  //cities viene de arriba y es tus favoritos ['Buenos Aires, AR','adfadf',etc]
+  //Pasarlo a LocationList como prop "favCities"
   render() {
       return (
-        <LocationList cities={this.props.citiesWeather}
+        <LocationList
+          cities={this.props.citiesWeather}
           onSelectedLocation={this.handleSelectedLocation}
           ></LocationList>
       );

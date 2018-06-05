@@ -1,31 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getUser, getCityFavoriteUser } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import LocationListContainer from './../containers/LocationListContainer';
 import ForecastExtendedContainer from './../containers/ForecastExtendedContainer';
 
 
-const cities = [
-  'Buenos Aires,AR',
-  'New York,US',
-  'Moscow, US',
-  'Berlin, US',
-  'Madrid,ES',
-  'Bogota,COL',
-  'Toki,JP'
-];
+// const cities = [
+//   'Buenos Aires,AR',
+//   'New York,US',
+//   'Moscow, US',
+//   'Berlin, US',
+//   'Madrid,ES',
+//   'Bogota,COL',
+//   'Toki,JP'
+// ];
 
 class Boards extends React.Component {
   // const cities = this.props;
-  constructor(){
-    super();
-
+  constructor(props){
+    super(props);
+    console.log(this.props.getCityFavoriteUser);
   }
 
-
-
   render() {
+    const nombre = this.props.match.params.nombre;
+    let cities;
+    if(this.props.user){
+      cities = this.props.user.ciudadesFavoritas.map(ciudad => {
+        if(!ciudad) return null;
+        return ciudad.city
+      })
+    }
+    console.log("cities",cities)
 
-    const nombre = 'laura';
     return (
       <div className="fondo-home">
         <div className="username">{`Usuario: ${nombre}`}</div>
@@ -43,5 +51,11 @@ class Boards extends React.Component {
   }
 }
 
+function mapStateToProps(state){
+  return {
+    user: state.user
 
-export default Boards;
+  }
+}
+
+export default connect(mapStateToProps, {getUser,getCityFavoriteUser})(Boards);

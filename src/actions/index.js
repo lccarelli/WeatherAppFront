@@ -27,10 +27,25 @@ export const getUser = (nombre) => {
   return (dispatch, getstate) => {
 
       axios.post('/getUser', { nombre }).then((response) => {
-        if(response.data) dispatch(GetUser(response.data.usuarios));
+        if(response.data) dispatch(GetUser(response.data.usuario));
       });
   }
 }
+
+export const GET_CITY_USER = 'GET_CITY_USER';
+
+const getCityUser = payload => ({ type: GET_CITY_USER, payload });
+
+export const getCityFavoriteUser = (nombre) => {
+  return (dispatch, getstate) => {
+
+      axios.post('/usuario/ciudadesFavoritas', { nombre }).then((response) => {
+        if(response.data) dispatch(getCityUser(response.data.usuario.ciudadesFavoritas));
+        console.log(response.data.usuario.ciudadesFavoritas);
+      });
+  }
+}
+
 
 //USERS
 export const SET_FAVORITE = 'SET_FAVORITE';
@@ -39,10 +54,24 @@ const setFavoriteAction = payload => ({ type: SET_FAVORITE, payload });
 
 export const setFavorite = (nombre, location) => {
   return (dispatch, getstate) => {
-      console.log('setfavorite');
       axios.post('/usuario/ciudadesFavoritas',{nombre,location})
       .then((response) => {
-        if(response.data)dispatch(setFavoriteAction(response.data));
+        if(response.data)dispatch(setFavoriteAction(response.data.usuario));
+      })
+  }
+}
+
+export const DELETE_FAVORITE = 'DELETE_FAVORITE';
+
+const deleteFavoriteAction = payload => ({ type: DELETE_FAVORITE, payload });
+
+export const deleteFavorite = (nombre, location) => {
+  console.log(nombre);
+  console.log(location);
+  return (dispatch, getstate) => {
+      axios.post('/usuario/deleteCiudadesFavoritas',{nombre,location})
+      .then((response) => {
+        if(response.data)dispatch(deleteFavoriteAction(response.data.usuario));
       })
   }
 }

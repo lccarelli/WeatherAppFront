@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +10,7 @@ import WeatherData from '../WeatherData';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import { deleteFavorite } from "../../actions"
 
 const styles = theme => ({
   card: {
@@ -40,7 +42,7 @@ const styles = theme => ({
 
 });
 
-const WeatherLocation =({onWeatherLocationClick, city, data, classes}) => (
+const WeatherLocation =({onWeatherLocationClick, city, data, classes, deleteFavorite, usuario}) => (
       <div>
         <Card className={classes.card} onClick={onWeatherLocationClick}>
           <div className={classes.details}>
@@ -50,7 +52,7 @@ const WeatherLocation =({onWeatherLocationClick, city, data, classes}) => (
                 <Grid item xs={9}>
                   {data ? <WeatherData data={data}/> : 'Cargando...'}
                 </Grid>
-                <Grid item xs={3} className="button-delete">
+                <Grid item xs={3} className="button-delete" onClick={()=>deleteFavorite(usuario.nombre,city)}>
                   <span className={classes.div}>
                     <IconButton className={classes.button} aria-label="Delete">
                       <DeleteIcon />
@@ -74,6 +76,13 @@ WeatherLocation.propTypes = {
     humidity: PropTypes.number.isRequired,
     wind: PropTypes.string.isRequired,
   }),
-}
+};
 
-export default withStyles(styles, { withTheme: true })(WeatherLocation);
+const mapStateToProps = (state) => {
+  return {
+    usuario: state.user
+  }
+};
+
+let tempComp = withStyles(styles, { withTheme: true })(WeatherLocation);
+export default connect(mapStateToProps,{ deleteFavorite })(tempComp);

@@ -36,19 +36,11 @@ class WeatherLocationHome extends React.Component{
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(e){
-    console.log(e);
-      axios.post('/usuario/ciudadesFavoritas', {}).then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  handleClick(city){
+    this.props.setFavorite(this.props.usuario.nombre,city);
+    console.log(this.props.usuario.nombre,city);
+    
   }
-
-  componentDidMount(){
-
-  };
 
   render() {
     let { city } = this.props;
@@ -93,12 +85,8 @@ WeatherLocationHome.propTypes = {
 
 const mapStateToProps = state => ({
   location: setFavorite(state),
-
-});
-
-const mapDispatchToPropsActions = dispatch => ({
-  setFavorite: value => dispatch(setFavorite(value)),
+  usuario: state.user
 });
 
 let styledComponent =  withStyles(styles, { withTheme: true })(WeatherLocationHome);
-export default connect(mapStateToProps, mapDispatchToPropsActions)(styledComponent);
+export default connect(mapStateToProps, { setFavorite })(styledComponent);

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from "react-redux";
 import { getUser } from "../actions"
+import { Redirect } from "react-router";
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,11 +15,17 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 class Start extends React.Component {
   constructor(){
     super();
-      this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      isRedirected:false
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(nombre){
     this.props.getUser(nombre);
+    this.setState({
+      isRedirected:true
+    })
   }
 
   render() {
@@ -26,17 +33,18 @@ class Start extends React.Component {
 
     return (
       <div className="fondo-home">
-
+          {this.state.isRedirected && <Redirect to="/home"/>}
           <div className="home-title">weatherApp</div>
             <div className="form-account">
                 <div className="user-button-container">
                   <button className="user-button" onClick={() => this.handleClick('laura')}>LAURA</button>
                 </div>
                 <div className="user-button-container">
-                  <button className="user-button" onClick={this.handleClick}>JUAN PABLO</button>
+                  <button className="user-button" onClick={() => this.handleClick('juan pablo')}>JUAN PABLO</button>
                 </div>
-
-
+                <div className="user-button-container">
+                  <button className="user-button" onClick={() => this.handleClick('evelyn')}>EVELYN</button>
+                </div>
             </div>
       </div>
     );
