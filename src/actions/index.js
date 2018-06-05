@@ -4,25 +4,49 @@ import transformWeather from './../services/transformWeather';
 
 
 //USERS
-export const START_GET_USERS = 'START_GET_USERS';
-export const COMPLETE_GET_USERS = 'COMPLETE_GET_USERS';
-export const ERROR_GET_USERS = 'ERROR_GET_USERS';
 
-const startGetUsers = payload => ({ type: START_GET_USERS, payload });
-const completeGetUsers = payload => ({ type: COMPLETE_GET_USERS, payload });
-const errorGetUsers = payload => ({ type: ERROR_GET_USERS, payload });
+export const GET_USERS = 'GET_USERS';
+
+const GetUsers = payload => ({ type: GET_USERS, payload });
 
 export const getUsers = () => {
   return (dispatch, getstate) => {
-      dispatch(startGetUsers());
+
       console.log('se llamo a la accion de get user');
       axios.get('/getUsers').then((response) => {
-        if(response.data)dispatch(completeGetUsers(response.data.usuarios));
-      }).catch((err) => {
-          dispatch(errorGetUsers(err));
+        if(response.data)dispatch(GetUsers(response.data.usuarios));
+      });
+  }
+}
+
+export const GET_USER = 'GET_USER';
+
+const GetUser = payload => ({ type: GET_USER, payload });
+
+export const getUser = (nombre) => {
+  return (dispatch, getstate) => {
+
+      axios.post('/getUser', { nombre }).then((response) => {
+        if(response.data) dispatch(GetUser(response.data.usuarios));
+      });
+  }
+}
+
+//USERS
+export const SET_FAVORITE = 'SET_FAVORITE';
+
+const setFavoriteAction = payload => ({ type: SET_FAVORITE, payload });
+
+export const setFavorite = (nombre, location) => {
+  return (dispatch, getstate) => {
+      console.log('setfavorite');
+      axios.post('/usuario/ciudadesFavoritas',{nombre,location})
+      .then((response) => {
+        if(response.data)dispatch(setFavoriteAction(response.data));
       })
   }
 }
+
 
 
 //CITY

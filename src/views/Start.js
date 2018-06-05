@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+import { connect } from "react-redux";
+import { getUser } from "../actions"
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -11,37 +14,39 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 class Start extends React.Component {
   constructor(){
     super();
+      this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount(){
-    // this.props.getUsers();
 
-  };
+  handleClick(nombre){
+    this.props.getUser(nombre);
+  }
 
   render() {
+
 
     return (
       <div className="fondo-home">
 
           <div className="home-title">weatherApp</div>
             <div className="form-account">
-              <div className="container-account">
-                <Grid container spacing={8} alignItems="flex-end">
-                  <Grid item>
-                    <AccountCircle />
-                  </Grid>
-                  <Grid item>
-                    <TextField id="input-with-icon-grid" label="Ingresa tu usuario" />
-                  </Grid>
-                </Grid>
-                <div className="board-button-container">
-                  <button className="board-button">MI BOARD</button>
+                <div className="user-button-container">
+                  <button className="user-button" onClick={() => this.handleClick('laura')}>LAURA</button>
                 </div>
-              </div>
+                <div className="user-button-container">
+                  <button className="user-button" onClick={this.handleClick}>JUAN PABLO</button>
+                </div>
+
+
             </div>
       </div>
     );
   }
 }
 
+function mapStateToProps(state){
+  return {
+    user: state.user
+  }
+}
 
-export default Start;
+export default connect(mapStateToProps, { getUser })(Start);

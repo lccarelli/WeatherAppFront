@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -7,6 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+
+import {setFavorite} from '../../actions';
 
 import Location from './../Location/Location';
 import WeatherData from '../WeatherData';
@@ -27,29 +31,53 @@ const styles = theme => ({
 });
 
 
-const WeatherLocationHome =({classes, city, data}) => (
+class WeatherLocationHome extends React.Component{
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(e){
+    console.log(e);
+      axios.post('/usuario/ciudadesFavoritas', {}).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
-    <div className={classes.root}>
-      <List className={classes.colorFont}>
-        <ListItem>
-          <Grid container spacing={8}>
-          <Grid item xs={6} sm={6}>
-                <Location city={city}/>
-          </Grid>
-          <Grid item xs={5} sm={5}>
-              {data ? <WeatherData data={data}/> : 'Cargando...'}
-          </Grid>
-          <Grid item xs={1} sm={1} className="FavButton">
-              <IconButton color="secondary" className={classes.button} aria-label="Add an alarm">
-                <Icon>favorite</Icon>
-              </IconButton>
-          </Grid>
-          </Grid>
-        </ListItem>
-        <Divider />
-      </List>
-    </div>
-);
+  componentDidMount(){
+
+  };
+
+  render() {
+    let { city } = this.props;
+    return (
+      <div className={this.props.classes.root}>
+        <List className={this.props.classes.colorFont}>
+          <ListItem>
+            <Grid container spacing={8}>
+              <Grid item xs={6} sm={6}>
+                <Location city={this.props.city}/>
+              </Grid>
+              <Grid item xs={5} sm={5}>
+                {this.props.data ? <WeatherData data={this.props.data}/> : 'Cargando...'}
+              </Grid>
+              <Grid item xs={1} sm={1} className="FavButton">
+                <IconButton color="secondary" className={this.props.classes.button} aria-label="Add an alarm" onClick={() => this.handleClick({city})}>
+                  <Icon>favorite</Icon>
+                </IconButton>
+              </Grid>
+            </Grid>
+          </ListItem>
+          <Divider />
+        </List>
+      </div>
+    );
+  }
+}
+
+
 
 WeatherLocationHome.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -63,4 +91,14 @@ WeatherLocationHome.propTypes = {
   }),
 }
 
-export default withStyles(styles, { withTheme: true })(WeatherLocationHome);
+const mapStateToProps = state => ({
+  location: setFavorite(state),
+
+});
+
+const mapDispatchToPropsActions = dispatch => ({
+  setFavorite: value => dispatch(setFavorite(value)),
+});
+
+let styledComponent =  withStyles(styles, { withTheme: true })(WeatherLocationHome);
+export default connect(mapStateToProps, mapDispatchToPropsActions)(styledComponent);

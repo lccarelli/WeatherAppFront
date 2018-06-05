@@ -8,6 +8,7 @@ import Home from './views/Home';
 import Start from './views/Start';
 
 
+
 class App extends React.Component {
 
   render() {
@@ -17,8 +18,9 @@ class App extends React.Component {
         <div>
           <Route exact path="/" component={Start}/>
           <Route exact path="/home" component={Home}/>
-          <Route exact path="/boards" component={ UserListItem }/>
+          {/* <Route exact path="/boards" component={ UserListItem }/> */}
           <Route exact path="/boards/:nombre" component={ UserBoard }/>
+
         </div>
       </Router>
 
